@@ -1,0 +1,81 @@
+<odoo>
+    <record id="view_stock_picking_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//field[@name='quantity']" position="after">
+                <field name="price_unit"/>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='price_unit']" position="after">
+                <field name="taxes_id" widget="many2many_tags"/>
+            </xpath>
+
+            <xpath expr="//notebook//field[@name='taxes_id']" position="after">
+                <field name="price_subtotal" widget="monetary"/>
+            </xpath>
+
+
+            <xpath expr="//field[@name='move_ids_without_package']" position="after">
+                <div class="oe_right" style="float:right; width:35%;">
+                    <div class="o_group o_inner_group">
+                        <table style="float:right; text-align:right; width:60%; font-size:15px;">
+                            <tr style="border-top: 1px solid #ccc;">
+                                <td style="text-align: left;">Untaxed Amount :</td>
+                                <td style="text-align: right; font-weight: bold;">
+                                    ₹
+                                    <field name="amount_untaxed" readonly="1" nolabel="1" class="oe_inline"/>
+                                </td>
+                            </tr>
+
+                            <tr invisible="amount_sgst == 0">
+                                <td style="text-align: left;">SGST :</td>
+                                <td style="text-align: right;">
+                                    ₹
+                                    <field name="amount_sgst" readonly="1" nolabel="1" class="oe_inline"
+                                           widget="monetary"/>
+                                </td>
+                            </tr>
+
+                            <tr invisible="amount_cgst == 0">
+                                <td style="text-align: left;">CGST :</td>
+                                <td style="text-align: right;">
+                                    ₹
+                                    <field name="amount_cgst" readonly="1" nolabel="1" class="oe_inline"
+                                           widget="monetary"/>
+                                </td>
+                            </tr>
+
+                            <tr invisible="amount_cess == 0">
+                                <td style="text-align: left;">CESS :</td>
+                                <td style="text-align: right;">
+                                    ₹
+                                    <field name="amount_cess" readonly="1" nolabel="1" class="oe_inline"
+                                           widget="monetary"/>
+                                </td>
+                            </tr>
+
+                            <tr invisible="amount_igst == 0">
+                                <td style="text-align: left;">IGST :</td>
+                                <td style="text-align: right;">
+                                    ₹
+                                    <field name="amount_igst" readonly="1" nolabel="1" class="oe_inline"
+                                           widget="monetary"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border-top: 1px solid #ccc;">
+                                <td style="text-align: left; font-weight: bold;">Total :</td>
+                                <td style="text-align: right; font-weight: bold;">
+                                    ₹
+                                    <field name="amount_total" readonly="1" nolabel="1" class="oe_inline"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
