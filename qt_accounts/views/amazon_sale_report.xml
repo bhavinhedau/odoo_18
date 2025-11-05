@@ -1,0 +1,175 @@
+<odoo>
+    <record id="amazon_invoice_view_form" model="ir.ui.view">
+        <field name="name">amazon.invoice.report.view.form</field>
+        <field name="model">amazon.invoice.report</field>
+        <field name="arch" type="xml">
+            <form string="Amazon Payment Report Form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="seller_gstin"/>
+                            <field name="invoice_number"/>
+                            <field name="invoice_date"/>
+                            <field name="transaction_type"/>
+                            <field name="order_id"/>
+                            <field name="shipment_id"/>
+                            <field name="shipment_date"/>
+                            <field name="order_date"/>
+                            <field name="shipment_item_id"/>
+                            <field name="quantity"/>
+                            <field name="item_description"/>
+                            <field name="asin"/>
+                            <field name="hsn_sac"/>
+                            <field name="sku"/>
+                            <field name="product_tax_code"/>
+                            <field name="bill_from_city"/>
+                            <field name="bill_from_state"/>
+                            <field name="bill_from_country"/>
+                            <field name="bill_from_postal_code"/>
+                            <field name="ship_from_city"/>
+                            <field name="ship_from_state"/>
+                            <field name="ship_from_country"/>
+                            <field name="ship_from_postal_code"/>
+                            <field name="ship_to_city"/>
+                            <field name="ship_to_state"/>
+                            <field name="ship_to_country"/>
+                            <field name="ship_to_postal_code"/>
+                            <field name="invoice_amount"/>
+                            <field name="tax_exclusive_gross"/>
+                            <field name="total_tax_amount"/>
+                            <field name="cgst_rate"/>
+                            <field name="sgst_rate"/>
+                            <field name="utgst_rate"/>
+                            <field name="igst_rate"/>
+                            <field name="compensatory_cess_rate"/>
+                        </group>
+                        <group>
+                            <field name="cgst_tax"/>
+                            <field name="sgst_tax"/>
+                            <field name="utgst_tax"/>
+                            <field name="igst_tax"/>
+                            <field name="compensatory_cess_tax"/>
+                            <field name="shipping_amount"/>
+                            <field name="shipping_cgst_tax"/>
+                            <field name="shipping_sgst_tax"/>
+                            <field name="shipping_igst_tax"/>
+                            <field name="gift_wrap_amount"/>
+                            <field name="gift_wrap_cgst_tax"/>
+                            <field name="gift_wrap_sgst_tax"/>
+                            <field name="gift_wrap_igst_tax"/>
+                            <field name="gift_wrap_amount"/>
+                            <field name="gift_wrap_cgst_tax"/>
+                            <field name="gift_wrap_sgst_tax"/>
+                            <field name="gift_wrap_igst_tax"/>
+                            <field name="tcs_cgst_rate"/>
+                            <field name="tcs_cgst_amount"/>
+                            <field name="tcs_sgst_rate"/>
+                            <field name="tcs_sgst_amount"/>
+                            <field name="tcs_utgst_rate"/>
+                            <field name="tcs_utgst_amount"/>
+                            <field name="tcs_igst_rate"/>
+                            <field name="tcs_igst_amount"/>
+                            <field name="warehouse_id"/>
+                            <field name="fulfillment_channel"/>
+                            <field name="payment_method_code"/>
+                            <field name="buyer_name"/>
+                            <field name="credit_note_no"/>
+                            <field name="credit_note_date"/>
+                            <field name="irn_number"/>
+                            <field name="irn_filing_status"/>
+                            <field name="irn_date"/>
+                            <field name="irn_error_code"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="amazon_payment_view_list" model="ir.ui.view">
+        <field name="name">amazon.invoice.report.view.list</field>
+        <field name="model">amazon.invoice.report</field>
+        <field name="arch" type="xml">
+            <list string="Amazon Payment Report List">
+                <field name="seller_gstin"/>
+                <field name="invoice_number"/>
+                <field name="invoice_date"/>
+                <field name="transaction_type"/>
+                <field name="order_id"/>
+                <field name="shipment_id"/>
+                <field name="shipment_date"/>
+                <field name="order_date"/>
+                <field name="shipment_item_id"/>
+                <field name="quantity"/>
+                <field name="item_description"/>
+                <field name="asin"/>
+                <field name="hsn_sac"/>
+                <field name="sku"/>
+                <field name="product_tax_code"/>
+                <field name="bill_from_city"/>
+                <field name="bill_from_state"/>
+                <field name="bill_from_country"/>
+                <field name="bill_from_postal_code"/>
+                <field name="ship_from_city"/>
+                <field name="ship_from_state"/>
+                <field name="ship_from_country"/>
+                <field name="ship_from_postal_code"/>
+                <field name="ship_to_city"/>
+                <field name="ship_to_state"/>
+                <field name="ship_to_country"/>
+                <field name="ship_to_postal_code"/>
+                <field name="invoice_amount"/>
+                <field name="tax_exclusive_gross"/>
+                <field name="total_tax_amount"/>
+                <field name="cgst_rate"/>
+                <field name="sgst_rate"/>
+                <field name="utgst_rate"/>
+                <field name="igst_rate"/>
+                <field name="compensatory_cess_rate"/>
+                <field name="cgst_tax"/>
+                <field name="sgst_tax"/>
+                <field name="utgst_tax"/>
+                <field name="igst_tax"/>
+                <field name="compensatory_cess_tax"/>
+                <field name="shipping_amount"/>
+                <field name="shipping_cgst_tax"/>
+                <field name="shipping_sgst_tax"/>
+                <field name="shipping_igst_tax"/>
+                <field name="gift_wrap_amount"/>
+                <field name="gift_wrap_cgst_tax"/>
+                <field name="gift_wrap_sgst_tax"/>
+                <field name="gift_wrap_igst_tax"/>
+                <field name="gift_wrap_amount"/>
+                <field name="gift_wrap_cgst_tax"/>
+                <field name="gift_wrap_sgst_tax"/>
+                <field name="gift_wrap_igst_tax"/>
+                <field name="tcs_cgst_rate"/>
+                <field name="tcs_cgst_amount"/>
+                <field name="tcs_sgst_rate"/>
+                <field name="tcs_sgst_amount"/>
+                <field name="tcs_utgst_rate"/>
+                <field name="tcs_utgst_amount"/>
+                <field name="tcs_igst_rate"/>
+                <field name="tcs_igst_amount"/>
+                <field name="warehouse_id"/>
+                <field name="fulfillment_channel"/>
+                <field name="payment_method_code"/>
+                <field name="buyer_name"/>
+                <field name="credit_note_no"/>
+                <field name="credit_note_date"/>
+                <field name="irn_number"/>
+                <field name="irn_filing_status"/>
+                <field name="irn_date"/>
+                <field name="irn_error_code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="amazon_invoice_action" model="ir.actions.act_window">
+        <field name="name">Amazon Report</field>
+        <field name="res_model">amazon.invoice.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+        <menuitem id="amazon_report_id" name="Amazon Report" action="amazon_invoice_action"/>
+
+</odoo>
