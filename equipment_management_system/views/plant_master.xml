@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_plant_master_tree" model="ir.ui.view">
+        <field name="name">plant.master.tree</field>
+        <field name="model">plant.master</field>
+        <field name="arch" type="xml">
+            <list duplicate="False" delete="False" import="false">
+                <field name="sequence"/>
+                <field name="plant_code"/>
+                <field name="plant_name"/>
+                <field name="serial_no"/>
+                <field name="plant_category_id"/>
+                <field name="maker_id"/>
+                <field name="plant_model_id"/>
+                <field name="capacity"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_plant_master_form" model="ir.ui.view">
+        <field name="name">plant.master.form</field>
+        <field name="model">plant.master</field>
+        <field name="arch" type="xml">
+            <form duplicate="False" delete="False">
+                <sheet>
+                    <h2>
+                        <field name="plant_code" readonly="1"/>
+                    </h2>
+                    <group>
+                        <group string="Basic Information">
+                            <field name="sequence" readonly="1"/>
+                            <field name="plant_name"/>
+                            <field name="serial_no" required="1" readonly="create_date"/>
+                            <field name="manufacturing_date"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Technical Specifications">
+                            <field name="maker_id" readonly="create_date" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="plant_model_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="plant_category_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="capacity" readonly="create_date" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group string="Purchase Information">
+                        <group>
+                            <field name="date_of_purchase"/>
+                            <field name="purchase_cost"/>
+                        </group>
+                    </group>
+                </sheet>
+                 <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="plant_master_search" model="ir.ui.view">
+        <field name="name">plant.master.search</field>
+        <field name="model">plant.master</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="sequence" string="Sequence"/>
+                <field name="plant_code" string="Plant Code"/>
+                <field name="plant_name" string="Plant Name"/>
+                <field name="serial_no" string="Serial No"/>
+                <field name="plant_category_id" string="Plant Category"/>
+                <field name="maker_id" string="Make"/>
+                <field name="plant_model_id" string="Model"/>
+                <field name="capacity" string="Capacity"/>
+
+                <filter string="Manufacturing Date" name="filter_manufacturing_date" date="manufacturing_date"/>
+                <filter string="Date of Purchase" name="filter_date_of_purchase" date="date_of_purchase"/>
+                <filter name="filter_active" string="Archived"  domain="[('active', '=', False)]"/>
+
+                <group>
+                    <filter string="Plant Name" name="group_plant_name" context="{'group_by': 'plant_name'}"/>
+                    <filter string="Plant Category" name="group_plant_category" context="{'group_by': 'plant_category_id'}"/>
+                    <filter string="Make" name="group_plant_make" context="{'group_by': 'maker_id'}"/>
+                    <filter string="Model" name="group_model" context="{'group_by': 'plant_model_id'}"/>
+                    <filter string="Capacity" name="group_capacity" context="{'group_by': 'capacity'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_plant_master" model="ir.actions.act_window">
+        <field name="name">Plant Management</field>
+        <field name="res_model">plant.master</field>
+        <field name="view_mode">list,form</field>
+        <field name="path">project</field>
+        <field name="view_id" ref="view_plant_master_tree"/>
+        <field name="path">plant</field>
+    </record>
+
+</odoo>

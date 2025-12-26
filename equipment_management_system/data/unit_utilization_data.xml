@@ -1,0 +1,20 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="unit_utilization_hrs" model="unit.utilization">
+            <field name="name">HRs</field>
+            <field name="description">Hours</field>
+        </record>
+
+        <record id="unit_utilization_kms" model="unit.utilization">
+            <field name="name">KMs</field>
+            <field name="description">Kilometers</field>
+        </record>
+
+<!--        <record id="equipment_purpose_no_work" model="equipment.purpose">-->
+<!--            <field name="name">No Work</field>-->
+<!--            <field name="description">No Work</field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

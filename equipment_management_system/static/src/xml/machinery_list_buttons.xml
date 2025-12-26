@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="ems.MachineryListButtons" t-inherit="web.ListView.Buttons" t-inherit-mode="primary">
+        <xpath expr="//div[hasclass('btn btn-primary o_list_button_add')]" position="after">
+            <div class="d-flex align-items-center ms-2">
+                <Dropdown class="'o_machinery_date_filter'" title="'Date Filter'">
+                    <t t-set-slot="toggler">
+                        <button class="btn btn-outline-secondary shadow-sm">
+                            <i class="fa fa-calendar me-2"/>
+                            <span>Date Filter</span>
+                        </button>
+                    </t>
+                    <t t-set-slot="content">
+                        <div class="p-2" style="min-width: 200px;">
+                            <DropdownItem class="'d-flex justify-content-between p-2'" onSelected="() => this.onSelectPeriod('month')">
+                                <span>Current Month</span>
+                            </DropdownItem>
+                            <DropdownItem class="'d-flex justify-content-between p-2'" onSelected="() => this.onSelectPeriod('year')">
+                                <span>Current Year</span>
+                            </DropdownItem>
+                            <div class="dropdown-divider"/>
+                            <DropdownItem class="'p-2'" onSelected="() => this.onSelectPeriod('all')">
+                                <span>Clear Filter</span>
+                            </DropdownItem>
+                        </div>
+                    </t>
+                </Dropdown>
+            </div>
+        </xpath>
+    </t>
+</templates>

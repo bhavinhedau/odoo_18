@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_user_master_tree" model="ir.ui.view">
+        <field name="name">user.master.tree</field>
+        <field name="model">user.master</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="designation"/>
+                <field name="mobile"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_user_master_form" model="ir.ui.view">
+        <field name="name">user.master.form</field>
+        <field name="model">user.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="designation"/>
+                        <field name="mobile"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_user_master" model="ir.actions.act_window">
+        <field name="name">Users</field>
+        <field name="res_model">user.master</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+</odoo>

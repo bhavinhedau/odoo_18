@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="equipment_master_list_view" model="ir.ui.view">
+        <field name="name">equipment.master.list</field>
+        <field name="model">equipment.master</field>
+        <field name="arch" type="xml">
+            <list duplicate="False" delete="False" import="false">
+                <field name="sequence"/>
+                <field name="equipment_ownership"/>
+                <field name="equipment_code"/>
+                <field name="equipment_type"/>
+                <field name="registration_no"/>
+                <field name="engine_no"/>
+                <field name="date_of_purchase"/>
+                <field name="purchase_cost"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="equipment_master_form_view" model="ir.ui.view">
+        <field name="name">equipment.master.form</field>
+        <field name="model">equipment.master</field>
+        <field name="arch" type="xml">
+            <form duplicate="False" delete="False">
+                <sheet>
+                    <div class="oe_title" style="margin-bottom: 10px;">
+                        <label for="equipment_code" string="Equipment Code" class="oe_form_label"/>
+                        <h1>
+                            <field name="equipment_code" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group col="2" class="oe_form_container">
+                        <group>
+                            <field name="equipment_ownership" readonly="create_date"/>
+                            <field name="sequence" readonly="1"/>
+<!--                            <field name="equipment_name"/>-->
+                            <field name="equipment_type" options="{'no_create': True, 'no_open': True}"
+                                   required="1" readonly="create_date"/>
+                            <field name="equipment_category"/>
+
+<!--                            <field name="hired_equipment_type" options="{'no_create': True, 'no_open': True}"-->
+<!--                                   invisible="equipment_ownership == 'own'" required="equipment_ownership == 'hired'"-->
+<!--                                   readonly="create_date"/>-->
+                        </group>
+                        <group>
+                            <field name="vendor_name" invisible="equipment_ownership == 'own'"/>
+                            <field name="manufacturing_date"/>
+                            <field name="registration_no"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group string="Technical Details" col="2" class="oe_form_container">
+                        <group>
+                            <field name="equipment_maker" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="equipment_model" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="equipment_capacity" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="equipment_purpose_ids" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="date_of_purchase" invisible="equipment_ownership == 'hired'"/>
+                            <field name="equipment_file_no" invisible="equipment_ownership == 'hired'"/>
+                        </group>
+                        <group>
+                            <field name="fuel_type"/>
+                            <field name="standard_fuel_average"/>
+                            <field name="starting_meter_reading"/>
+<!--                            <field name="location_code" invisible="equipment_ownership == 'hired'"/>-->
+                            <field name="engine_no" invisible="equipment_ownership == 'hired'"/>
+                            <field name="chassis_no" invisible="equipment_ownership == 'hired'"/>
+                        </group>
+                    </group>
+                    <group string="Utilization" col="2" class="oe_form_container">
+                        <group>
+                            <field name="unit_of_utilization" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="show_kms_fields" invisible="1"/>
+                            <field name="show_hrs_fields" invisible="1"/>
+                            <field name="odometer" invisible="not show_kms_fields"/>
+                            <field name="hourmeter" widget="float_time" invisible="not show_hrs_fields"/>
+                        </group>
+                        <group>
+                            <field name="service_reminder_kmr" invisible="equipment_ownership == 'hired' or not show_kms_fields"/>
+                            <field name="service_reminder_hmr" invisible="equipment_ownership == 'hired' or not show_hrs_fields"/>
+                            <field name="last_service_kmr" invisible="equipment_ownership == 'hired' or not show_kms_fields"/>
+                            <field name="last_service_hmr" invisible="equipment_ownership == 'hired' or not show_hrs_fields"/>
+                        </group>
+                    </group>
+                    <group string="Financial Details" col="2" class="oe_form_container">
+                        <group>
+                            <field name="delivery_project" options="{'no_create': True, 'no_open': True}"
+                                   invisible="equipment_ownership == 'hired'"/>
+                            <field name="hired_date" invisible="equipment_ownership == 'own'"/>
+                            <field name="hired_cost" invisible="equipment_ownership == 'own'"/>
+                            <field name="purchase_cost" invisible="equipment_ownership == 'hired'"/>
+                            <field name="cost_center_name"/>
+                            <field name="cost_center_code"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="equipment_master_search" model="ir.ui.view">
+        <field name="name">equipment.master.search</field>
+        <field name="model">equipment.master</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="sequence" string="Sequence"/>
+                <field name="equipment_code" string="Code"/>
+<!--                <field name="equipment_name"/>-->
+                <field name="registration_no"/>
+                <field name="engine_no"/>
+                <field name="date_of_purchase"/>
+                <field name="purchase_cost"/>
+
+                <filter string="Date of Purchase" name="filter_date_of_purchase" date="date_of_purchase"/>
+                <filter name="filter_active" string="Archived" domain="[('active', '=', False)]"/>
+
+                <group>
+                    <filter string="Equipment Ownership" name="group_equipment_ownership" context="{'group_by': 'equipment_ownership'}"/>
+<!--                    <filter string="Equipment Name" name="group_equipment_name" context="{'group_by': 'equipment_name'}"/>-->
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="equipment_master_action" model="ir.actions.act_window">
+        <field name="name">Equipment Master</field>
+        <field name="res_model">equipment.master</field>
+        <field name="view_mode">list,form</field>
+        <field name="path">equipment</field>
+    </record>
+</odoo>

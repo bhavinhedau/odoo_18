@@ -1,0 +1,19 @@
+<odoo>
+
+    <record id="view_sap_payment_term_list" model="ir.ui.view">
+        <field name="name">sap.payment.term.list</field>
+        <field name="model">sap.payment.term</field>
+        <field name="arch" type="xml">
+            <list string="SAP Payment Terms">
+                <field name="groupnum"/>
+                <field name="pymntgroup"/>
+                <field name="extradays"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_sap_payment_term" model="ir.actions.act_window">
+        <field name="name">SAP Payment Terms</field>
+        <field name="res_model">sap.payment.term</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,190 @@
+<odoo>
+    <record id="view_machinery_progress_tree" model="ir.ui.view">
+        <field name="name">machinery.progress.list</field>
+        <field name="model">machinery.progress</field>
+        <field name="arch" type="xml">
+            <list string="Machinery Progress"
+                  sample="1"
+                  multi_edit="1"
+                  decoration-muted="state == 'rejected'"
+                  decoration-bf="state == 'approved'" duplicate="false" delete="false" import="false">
+                <field name="name" decoration-bf="1"/>
+                <field name="project_id"/>
+                <field name="project_name"/>
+                <field name="report_date"/>
+                <field name="report_send_by" widget="many2one_avatar_user"/>
+                <field name="petrol_received" optional="show"/>
+                <field name="diesel_received" optional="show"/>
+                <field name="opening_petrol" optional="show"/>
+                <field name="closing_petrol" sum="Total Petrol" optional="show"/>
+                <field name="opening_diesel" optional="show"/>
+                <field name="closing_diesel" sum="Total Diesel" optional="show"/>
+                <field name="t_utilization_km" optional="show"/>
+                <field name="t_utilization_hr" optional="show"/>
+                <field name="remarks" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'in_approval'"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'rejected'"/>
+                <field name="working_hrs" sum="Total Working" decoration-bf="1" widget="float_time" optional="show"/>
+                <field name="breakdown_hrs" sum="Total Breakdown" decoration-danger="breakdown_hrs > 0"
+                       optional="show" widget="float_time"/>
+                <field name="idle_hrs" sum="Total Idle" optional="show" widget="float_time"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_machinery_progress_form" model="ir.ui.view">
+        <field name="name">machinery.progress.form</field>
+        <field name="model">machinery.progress</field>
+        <field name="arch" type="xml">
+            <form duplicate="false" create="false" delete="false">
+                <header>
+                    <button name="action_send_for_approval" string="Send for Approval" type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Approve" type="object" class="btn-primary"
+                            invisible="(state != 'in_approval') or (not can_approve)"/>
+                    <button name="action_draft" string="Send Back" type="object" class="btn-primary"
+                            invisible="(state != 'in_approval')  or (not can_approve)"/>
+                    <button name="action_reject" string="Reject" type="object" class="btn-danger"
+                            invisible="(state != 'in_approval') or (not can_approve)"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_approval,approved"/>
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button name="action_view_progress_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-list">
+                            <field name="progress_line_ids" widget="statinfo" string="Progress Lines"/>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" nolabel="1" readonly="1"/>
+                    </h1>
+                    <group>
+                        <field name="can_edit" invisible="1"/>
+                        <field name="can_approve" invisible="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="project_id" options="{'no_create': True, 'no_open': True}"
+                                   readonly="(state != 'draft') or (not can_edit)"
+                                   domain="[('assign_user_ids.user_id', 'in', [uid])]"/>
+                            <field name="project_name" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" string="Report Submit Date"/>
+                            <field name="report_date" widget="date" readonly="(state != 'draft') or (not can_edit)"/>
+                            <field name="report_send_by" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            <!--                            <field name="report_date" widget="date" readonly="report_date &lt; context_today().strftime('%Y-%m-%d')"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="opening_petrol"/>
+                            <field name="opening_diesel"/>
+                            <field name="diesel_received" readonly="(state != 'draft') or (not can_edit)"/>
+                            <field name="petrol_received" readonly="(state != 'draft') or (not can_edit)"/>
+                        </group>
+                        <group>
+                            <field name="closing_petrol" readonly="1"/>
+                            <field name="closing_diesel" readonly="1"/>
+                            <field name="working_hrs" readonly="1" widget="float_time"/>
+                            <field name="idle_hrs" readonly="1" widget="float_time"/>
+                            <field name="breakdown_hrs" readonly="1" widget="float_time"/>
+                            <field name="t_utilization_km"/>
+                            <field name="t_utilization_hr"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Daily Equipment Details">
+                            <field name="progress_line_ids" readonly="(state != 'draft') or (not can_edit)">
+                                <list editable="bottom" create="false">
+                                    <!--                                    <field name="date"/>-->
+                                    <!--                                    <field name="project_id" options="{'no_create': True, 'no_open': True}"/>-->
+                                    <!--                                    <field name="project_name"/>-->
+                                    <field name="available_equipment_ids" widget="badge" column_invisible="1"/>
+                                    <field name="equipment_id" domain="[('id', 'in', available_equipment_ids)]"
+                                           options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="registration_no"/>
+                                    <!--                                    <field name="equipment_name"/>-->
+                                    <field name="fuel_type"/>
+                                    <field name="equipment_condition"/>
+                                    <field name="purpose" options="{'no_create': True, 'no_open': True}" readonly="(equipment_condition in ('breakdown','idle'))"/>
+                                    <field name="unit_of_utilization" options="{'no_create': True, 'no_open': True}" column_invisible="1"/>
+                                    <!--                                           readonly="(equipment_condition in ('breakdown','idle')) or (not equipment_condition)"/>-->
+                                    <field name="unit_of_utilization_name" />
+                                    <field name="opening_reading_km" readonly="1"/>
+                                    <field name="closing_reading_km"
+                                           readonly="(unit_of_utilization_name == 'HRs')"/>
+                                    <field name="utilization_km"/>
+                                    <field name="opening_reading_hr" widget="float_time" readonly="1"/>
+                                    <field name="closing_reading_hr" widget="float_time"
+                                           readonly="unit_of_utilization_name == 'KMs'"/>
+                                    <field name="utilization_hr" widget="float_time"/>
+                                    <field name="fuel_issue"/>
+                                    <field name="working_hours" widget="float_time"/>
+<!--                                    <field name="working_hours" widget="float_time"-->
+<!--                                           readonly="(equipment_condition in ('breakdown','idle'))"/>-->
+                                    <field name="breakdown_hours" widget="float_time"
+                                           readonly="(not equipment_condition)"/>
+                                    <field name="idle_hours" widget="float_time" readonly="1"/>
+                                    <field name="remarks"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="remarks" nolabel="1" placeholder="Internal Remarks"/>
+                    </group>
+
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_machinery_progress_search" model="ir.ui.view">
+        <field name="name">machinery.progress.search</field>
+        <field name="model">machinery.progress</field>
+        <field name="arch" type="xml">
+            <search string="Search Machinery Progress">
+                <field name="name" string="Sequence"/>
+                <field name="project_id"/>
+                <field name="report_send_by"/>
+                <field name="project_id" string="Project Code"/>
+                <field name="project_name" string="Project Name"/>
+
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="In Approval" name="in_approval" domain="[('state', '=', 'in_approval')]"/>
+                <filter string="Approved" name="approved" domain="[('state', '=', 'approved')]"/>
+                <filter string="Rejected" name="rejected" domain="[('state', '=', 'rejected')]"/>
+                <separator/>
+                <filter string="My Reports" name="my_reports" domain="[('report_send_by', '=', uid)]"/>
+                <separator/>
+                <filter string="Report Date" name="filter_report_date" date="report_date"/>
+                <separator/>
+                <filter string="Has Breakdown" name="has_breakdown" domain="[('breakdown_hrs', '>', 0.0)]"/>
+                <filter string="Fuel Received" name="fuel_received"
+                        domain="['|', ('petrol_received', '>', 0.0), ('diesel_received', '>', 0.0)]"/>
+
+                <group>
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Reported By" name="group_user" context="{'group_by': 'report_send_by'}"/>
+                    <filter string="Report Date" name="group_date" context="{'group_by': 'report_date'}"/>
+                    <filter string="Report Send By" name="report_send_by" context="{'group_by': 'report_send_by'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_machinery_progress" model="ir.actions.act_window">
+        <field name="name">Machinery Progress</field>
+        <field name="res_model">machinery.progress</field>
+        <field name="view_mode">list,form</field>
+        <field name="path">machinery</field>
+    </record>
+
+</odoo>

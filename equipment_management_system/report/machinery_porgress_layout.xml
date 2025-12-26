@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="action_machinery_progress_report" model="ir.actions.report">
+        <field name="name">Print Machinery Progress</field>
+        <field name="model">machinery.progress</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">equipment_management_system.machinery_progress_report_template</field>
+        <field name="report_file">equipment_management_system.machinery_progress_report_template</field>
+        <field name="binding_model_id" ref="model_machinery_progress"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Template -->
+    <template id="machinery_progress_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header Section -->
+                        <div class="row mb-3">
+                            <div class="col-12 text-center">
+                                <h2 style="color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px;">
+                                    <strong>MACHINERY PROGRESS REPORT</strong>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- Report Information -->
+                        <div class="row mb-4" style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width: 40%;"><strong>Report No:</strong></td>
+                                        <td><span t-field="doc.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Project Code:</strong></td>
+                                        <td><span t-field="doc.project_id"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Project Name:</strong></td>
+                                        <td><span t-field="doc.project_name"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width: 40%;"><strong>Report Date:</strong></td>
+                                        <td><span t-field="doc.report_date"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Reported By:</strong></td>
+                                        <td><span t-field="doc.report_send_by.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status:</strong></td>
+                                        <td>
+                                            <span t-if="doc.state == 'draft'" class="badge badge-secondary">Draft</span>
+                                            <span t-if="doc.state == 'in_approval'" class="badge badge-warning">In Approval</span>
+                                            <span t-if="doc.state == 'approved'" class="badge badge-success">Approved</span>
+                                            <span t-if="doc.state == 'rejected'" class="badge badge-danger">Rejected</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Fuel Summary Section -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h4 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 15px;">
+                                    Fuel Summary
+                                </h4>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <table class="table table-bordered table-sm">
+                                    <thead style="background-color: #3498db; color: white;">
+                                        <tr>
+                                            <th colspan="2" class="text-center">PETROL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 60%;"><strong>Opening Balance:</strong></td>
+                                            <td class="text-right"><span t-field="doc.opening_petrol"/> Ltr</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Received:</strong></td>
+                                            <td class="text-right"><span t-field="doc.petrol_received"/> Ltr</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Issued:</strong></td>
+                                            <td class="text-right">
+                                                <t t-set="petrol_issued" t-value="sum(doc.progress_line_ids.filtered(lambda x: x.fuel_type == 'petrol').mapped('fuel_issue'))"/>
+                                                <span t-esc="'%.2f' % petrol_issued"/> Ltr
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: #ecf0f1; font-weight: bold;">
+                                            <td><strong>Closing Balance:</strong></td>
+                                            <td class="text-right"><span t-field="doc.closing_petrol"/> Ltr</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-bordered table-sm">
+                                    <thead style="background-color: #e67e22; color: white;">
+                                        <tr>
+                                            <th colspan="2" class="text-center">DIESEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 60%;"><strong>Opening Balance:</strong></td>
+                                            <td class="text-right"><span t-field="doc.opening_diesel"/> Ltr</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Received:</strong></td>
+                                            <td class="text-right"><span t-field="doc.diesel_received"/> Ltr</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Issued:</strong></td>
+                                            <td class="text-right">
+                                                <t t-set="diesel_issued" t-value="sum(doc.progress_line_ids.filtered(lambda x: x.fuel_type == 'diesel').mapped('fuel_issue'))"/>
+                                                <span t-esc="'%.2f' % diesel_issued"/> Ltr
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color: #ecf0f1; font-weight: bold;">
+                                            <td><strong>Closing Balance:</strong></td>
+                                            <td class="text-right"><span t-field="doc.closing_diesel"/> Ltr</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Equipment Details Section -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <h4 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 15px;">
+                                    Equipment Progress Details
+                                </h4>
+                            </div>
+                        </div>
+
+                        <table class="table table-bordered table-sm" style="font-size: 9pt;">
+                            <thead style="background-color: #34495e; color: white;">
+                                <tr>
+                                    <th class="text-center" style="width: 3%;">#</th>
+                                    <th style="width: 10%;">Equipment Code</th>
+                                    <th style="width: 10%;">Registration No</th>
+                                    <th style="width: 8%;">Fuel Type</th>
+                                    <th style="width: 8%;">Condition</th>
+                                    <th style="width: 12%;">Purpose</th>
+                                    <th class="text-center" style="width: 7%;">Opening KM/HR</th>
+                                    <th class="text-center" style="width: 7%;">Closing KM/HR</th>
+                                    <th class="text-center" style="width: 7%;">Utilization</th>
+                                    <th class="text-center" style="width: 6%;">Fuel Issue</th>
+                                    <th class="text-center" style="width: 6%;">Working Hrs</th>
+                                    <th style="width: 16%;">Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="line_no" t-value="0"/>
+                                <t t-foreach="doc.progress_line_ids" t-as="line">
+                                    <t t-set="line_no" t-value="line_no + 1"/>
+                                    <tr>
+                                        <td class="text-center"><span t-esc="line_no"/></td>
+                                        <td><span t-field="line.equipment_id"/></td>
+                                        <td><span t-field="line.registration_no"/></td>
+                                        <td>
+                                            <span t-if="line.fuel_type == 'diesel'" class="badge badge-warning">Diesel</span>
+                                            <span t-if="line.fuel_type == 'petrol'" class="badge badge-info">Petrol</span>
+                                        </td>
+                                        <td>
+                                            <span t-if="line.equipment_condition == 'working'" class="badge badge-success">Working</span>
+                                            <span t-if="line.equipment_condition == 'idle'" class="badge badge-warning">Idle</span>
+                                            <span t-if="line.equipment_condition == 'breakdown'" class="badge badge-danger">Breakdown</span>
+                                        </td>
+                                        <td><span t-field="line.purpose.name"/></td>
+                                        <td class="text-center">
+                                            <t t-if="line.opening_reading_km > 0">
+                                                <span t-field="line.opening_reading_km"/> KM
+                                            </t>
+                                            <t t-if="line.opening_reading_hr > 0">
+                                                <span t-field="line.opening_reading_hr"/> HR
+                                            </t>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-if="line.closing_reading_km > 0">
+                                                <span t-field="line.closing_reading_km"/> KM
+                                            </t>
+                                            <t t-if="line.closing_reading_hr > 0">
+                                                <span t-field="line.closing_reading_hr"/> HR
+                                            </t>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-if="line.utilization_km > 0">
+                                                <span t-field="line.utilization_km"/> KM
+                                            </t>
+                                            <t t-if="line.utilization_hr > 0">
+                                                <span t-field="line.utilization_hr"/> HR
+                                            </t>
+                                        </td>
+                                        <td class="text-right"><span t-field="line.fuel_issue"/></td>
+                                        <td class="text-center"><span t-field="line.working_hours"/></td>
+                                        <td style="font-size: 8pt;"><span t-field="line.remarks"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Summary Statistics -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h4 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 15px;">
+                                    Summary Statistics
+                                </h4>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-3">
+                                <div style="background-color: #2ecc71; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                    <h6>Total Working Hours</h6>
+                                    <h3><span t-field="doc.working_hrs"/></h3>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div style="background-color: #f39c12; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                    <h6>Total Idle Hours</h6>
+                                    <h3><span t-field="doc.idle_hrs"/></h3>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div style="background-color: #e74c3c; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                    <h6>Breakdown Hours</h6>
+                                    <h3><span t-field="doc.breakdown_hrs"/></h3>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div style="background-color: #3498db; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                    <h6>Total Equipment</h6>
+                                    <h3><t t-esc="len(doc.progress_line_ids)"/></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Utilization Summary -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div style="border: 2px solid #3498db; padding: 10px; border-radius: 5px;">
+                                    <strong>Total Utilization (KM):</strong>
+                                    <span class="float-right" style="font-size: 14pt; color: #2c3e50;">
+                                        <strong><span t-field="doc.t_utilization_km"/> KM</strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div style="border: 2px solid #e67e22; padding: 10px; border-radius: 5px;">
+                                    <strong>Total Utilization (HR):</strong>
+                                    <span class="float-right" style="font-size: 14pt; color: #2c3e50;">
+                                        <strong><span t-field="doc.t_utilization_hr"/> HR</strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Remarks Section -->
+                        <t t-if="doc.remarks">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 10px;">
+                                        General Remarks
+                                    </h5>
+                                    <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #3498db; border-radius: 3px;">
+                                        <span t-field="doc.remarks"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Equipment Condition Summary -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 10px;">
+                                    Equipment Condition Breakdown
+                                </h5>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div style="border: 1px solid #2ecc71; padding: 10px; border-radius: 5px; text-align: center;">
+                                    <h6 style="color: #2ecc71;">Working Equipment</h6>
+                                    <h4>
+                                        <t t-set="working_count" t-value="len(doc.progress_line_ids.filtered(lambda x: x.equipment_condition == 'working'))"/>
+                                        <span t-esc="working_count"/>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div style="border: 1px solid #f39c12; padding: 10px; border-radius: 5px; text-align: center;">
+                                    <h6 style="color: #f39c12;">Idle Equipment</h6>
+                                    <h4>
+                                        <t t-set="idle_count" t-value="len(doc.progress_line_ids.filtered(lambda x: x.equipment_condition == 'idle'))"/>
+                                        <span t-esc="idle_count"/>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div style="border: 1px solid #e74c3c; padding: 10px; border-radius: 5px; text-align: center;">
+                                    <h6 style="color: #e74c3c;">Breakdown Equipment</h6>
+                                    <h4>
+                                        <t t-set="breakdown_count" t-value="len(doc.progress_line_ids.filtered(lambda x: x.equipment_condition == 'breakdown'))"/>
+                                        <span t-esc="breakdown_count"/>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer / Signatures -->
+                        <div class="row mt-5" style="page-break-inside: avoid;">
+                            <div class="col-4 text-center">
+                                <div style="border-top: 2px solid #000; padding-top: 10px; margin-top: 50px;">
+                                    <strong>Prepared By</strong><br/>
+                                    <span t-field="doc.report_send_by.name"/>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div style="border-top: 2px solid #000; padding-top: 10px; margin-top: 50px;">
+                                    <strong>Checked By</strong><br/>
+                                    Project Manager
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div style="border-top: 2px solid #000; padding-top: 10px; margin-top: 50px;">
+                                    <strong>Approved By</strong><br/>
+                                    Management
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

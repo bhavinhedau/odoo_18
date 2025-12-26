@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_date_range_wizard_form" model="ir.ui.view">
+        <field name="name">date.range.wizard.form</field>
+        <field name="model">date.range.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Date Range">
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+                <footer>
+                    <button string="Apply"
+                            type="object"
+                            name="action_apply"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_date_range_wizard" model="ir.actions.act_window">
+        <field name="name">Filter by Date</field>
+        <field name="res_model">date.range.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+<!--        <field name="binding_model_id" ref="model_machinery_progress"/>-->
+<!--        <field name="binding_view_types">list</field>-->
+    </record>
+
+</odoo>

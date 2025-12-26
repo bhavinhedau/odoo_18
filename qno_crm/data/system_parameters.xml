@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+        <record id="odoo_api_key" model="ir.config_parameter">
+            <field name="key">sap.odoo.api.key</field>
+            <field name="value">QO61A1J77TP73U5</field>
+        </record>
+        <record id="odoo_sale_order_create" model="ir.config_parameter">
+            <field name="key">sap.sale.order.url</field>
+            <field name="value">http://37.27.133.186:35678/OdooSalesOrder</field>
+        </record>
+    </data>
+</odoo>

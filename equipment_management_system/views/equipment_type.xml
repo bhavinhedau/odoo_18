@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="equipment_type_list_view" model="ir.ui.view">
+        <field name="name">equipment.type.list</field>
+        <field name="model">equipment.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="prefix"/>
+                <field name="sequence"/>
+                <field name="h_prefix"/>
+                <field name="h_sequence"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="equipment_type_form_view" model="ir.ui.view">
+        <field name="name">equipment.type.form</field>
+        <field name="model">equipment.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="prefix"/>
+                            <field name="sequence" readonly="1"/>
+                            <field name="h_prefix"/>
+                            <field name="h_sequence" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="equipment_type_action" model="ir.actions.act_window">
+        <field name="name">Equipment Type</field>
+        <field name="res_model">equipment.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Equipment Type
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

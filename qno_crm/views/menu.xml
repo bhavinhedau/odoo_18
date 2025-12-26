@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        <menuitem
+                name="Sap Master"
+                id="menu_sap_master"
+                parent="base.menu_administration"
+                groups="base.group_no_one"
+                sequence="2"
+        />
+        <menuitem id="menu_api_log_root"
+                  name="API Logs"
+                  groups="base.group_no_one"
+                  parent="base.menu_administration"
+                  action="action_api_log"
+                  sequence="3"/>
+        <menuitem
+                name="Warehouses"
+                id="sap_warehouse_menu"
+                parent="qno_crm.menu_sap_master"
+                action="sap_warehouse_action"
+                sequence="1"/>
+        <menuitem
+                name="Taxes"
+                id="sap_taxes_menu"
+                parent="qno_crm.menu_sap_master"
+                action="sap_taxes_action"
+                sequence="2"
+        />
+        <menuitem id="menu_customer_group"
+                  name="Customer Groups" parent="qno_crm.menu_sap_master"
+                  action="action_customer_group"
+                  sequence="3"/>
+        <menuitem id="menu_customer_series" action="action_customer_series" parent="qno_crm.menu_sap_master"
+                  name="Customer Series"
+                  sequence="4"/>
+        <menuitem id="menu_sap_payment_term"
+                  name="SAP Payment Terms"
+                  parent="qno_crm.menu_sap_master"
+                  action="action_sap_payment_term"
+                  sequence="5"/>
+
+    </data>
+</odoo>

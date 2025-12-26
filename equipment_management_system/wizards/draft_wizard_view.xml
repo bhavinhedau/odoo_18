@@ -1,0 +1,17 @@
+<odoo>
+    <record id="machinery_draft_wizard_form_view" model="ir.ui.view">
+        <field name="name">machinery.draft.wizard.form</field>
+        <field name="model">machinery.draft.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Write Send Back Remarks">
+                <group>
+                    <field name="remarks" required="1" placeholder="Internal Remarks..."/>
+                </group>
+                <footer>
+                    <button name="action_confirm_draft" string="Send Back" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

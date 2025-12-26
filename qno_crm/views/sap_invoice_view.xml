@@ -1,0 +1,82 @@
+<odoo>
+     <record id="view_sap_invoice_form" model="ir.ui.view">
+        <field name="name">sap.invoice.form</field>
+        <field name="model">sap.invoice</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="doc_entry"/>
+                        <field name="doc_number"/>
+                        <field name="num_at_card"/>
+                        <field name="date"/>
+                        <field name="card_code"/>
+                        <field name="card_name"/>
+                        <field name="ship_to_code"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Document Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="line_num"/>
+                                    <field name="base_entry"/>
+                                    <field name="base_line"/>
+                                    <field name="item_code"/>
+                                    <field name="item_description"/>
+                                    <field name="quantity"/>
+                                    <field name="uom"/>
+                                    <field name="price"/>
+                                    <field name="tax_code"/>
+                                    <field name="line_total"/>
+                                    <field name="line_total_with_tax"/>
+                                </list>
+                            </field>
+                            <field name="remarks"/>
+                            <group class="oe_subtotal_footer">
+                                <field name="total_before_tax"/>
+                                <field name="total_tax"/>
+                                <field name="doc_total"/>
+                            </group>
+                        </page>
+
+                        <page string="Batch Details">
+                            <field name="batch_all_ids">
+                                <list editable="bottom">
+                                    <field name="line_id"/>
+                                    <field name="batch_number"/>
+                                    <field name="quantity_number"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sap_invoice_list" model="ir.ui.view">
+        <field name="name">sap.invoice.list</field>
+        <field name="model">sap.invoice</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="doc_entry"/>
+                <field name="card_code"/>
+                <field name="card_name"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+     <record id="action_sap_invoice" model="ir.actions.act_window">
+        <field name="name">SAP Invoice</field>
+        <field name="res_model">sap.invoice</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_sap_invoice"
+              parent="menu_sap_data_root"
+              name="Sap Invoice"
+              action="action_sap_invoice"
+              sequence="2" />
+</odoo>

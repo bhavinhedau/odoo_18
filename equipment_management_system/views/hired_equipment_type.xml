@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="hired_equipment_type_list_view" model="ir.ui.view">
+        <field name="name">hired.equipment.type.list</field>
+        <field name="model">hired.equipment.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="prefix"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="hired_equipment_type_form_view" model="ir.ui.view">
+        <field name="name">hired.equipment.type.form</field>
+        <field name="model">hired.equipment.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="prefix"/>
+                            <field name="sequence" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="hired_equipment_type_action" model="ir.actions.act_window">
+        <field name="name">Hired Equipment Name</field>
+        <field name="res_model">hired.equipment.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Equipment Name
+            </p>
+        </field>
+    </record>
+</odoo>

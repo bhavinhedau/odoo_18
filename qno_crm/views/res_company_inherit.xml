@@ -1,0 +1,13 @@
+<odoo>
+    <record id="res_company_inherit" model="ir.ui.view">
+        <field name="name">Res Company Inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="sap_default_warehouse_id" options="{'no_create': True, 'no_open': True}" groups="base.group_no_one"/>
+                <field name="sap_branch_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

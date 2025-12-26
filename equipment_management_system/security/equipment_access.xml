@@ -1,0 +1,113 @@
+<odoo>
+<!--    Equipment rights start-->
+    <record id="module_equipment_management_category" model="ir.module.category">
+        <field name="name">Equipment Management</field>
+        <field name="description">Access rights related to equipment management system.</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="res.groups.privilege" id="equipment_management_privilege">
+        <field name="name">Equipment Management Privilege</field>
+        <field name="category_id" ref="equipment_management_system.module_equipment_management_category"/>
+        <field name="sequence">1</field>
+    </record>
+    <record id="group_equipment_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="equipment_management_system.equipment_management_privilege"/>
+        <field name="comment">Users in this group have access to every equipment management model.</field>
+    </record>
+    <record id="group_equipment_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="equipment_management_system.equipment_management_privilege"/>
+        <field name="comment">Users in this group have access to only equipment master.</field>
+    </record>
+    <record id="group_equipment_viewer" model="res.groups">
+        <field name="name">Viewer</field>
+        <field name="privilege_id" ref="equipment_management_system.equipment_management_privilege"/>
+        <field name="comment">Users in this group only have access to view.</field>
+    </record>
+<!--    End-->
+
+<!--    Plant rights start-->
+    <record id="module_plant_management_category" model="ir.module.category">
+        <field name="name">Plant Management</field>
+        <field name="description">Access rights related to plant management system.</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="res.groups.privilege" id="plant_management_privilege">
+        <field name="name">Plant Management Privilege</field>
+        <field name="category_id" ref="equipment_management_system.module_plant_management_category"/>
+        <field name="sequence">2</field>
+    </record>
+    <record id="group_plant_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="equipment_management_system.plant_management_privilege"/>
+        <field name="comment">Users in this group have access to every plant management model.</field>
+    </record>
+    <record id="group_plant_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="equipment_management_system.plant_management_privilege"/>
+        <field name="comment">Users in this group have access to only plant master.</field>
+    </record>
+    <record id="group_plant_viewer" model="res.groups">
+        <field name="name">Viewer</field>
+        <field name="privilege_id" ref="equipment_management_system.plant_management_privilege"/>
+        <field name="comment">Users in this group only have access to view.</field>
+    </record>
+<!--    End-->
+
+<!--    project rights start-->
+    <record id="module_project_management_category" model="ir.module.category">
+        <field name="name">Project Management</field>
+        <field name="description">Access rights related to project management system.</field>
+        <field name="sequence">3</field>
+    </record>
+    <record model="res.groups.privilege" id="project_management_privilege">
+        <field name="name">Project Management Privilege</field>
+        <field name="category_id" ref="equipment_management_system.module_project_management_category"/>
+        <field name="sequence">3</field>
+    </record>
+    <record id="group_project_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="equipment_management_system.project_management_privilege"/>
+        <field name="comment">Users in this group have access to every project management model.</field>
+    </record>
+    <record id="group_project_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="equipment_management_system.project_management_privilege"/>
+        <field name="comment">Users in this group have access to only project master.</field>
+    </record>
+    <record id="group_project_viewer" model="res.groups">
+        <field name="name">Viewer</field>
+        <field name="privilege_id" ref="equipment_management_system.project_management_privilege"/>
+        <field name="comment">Users in this group only have access to view.</field>
+    </record>
+<!--    end-->
+
+<!--    machinery rights start-->
+    <record id="module_machinery_management_category" model="ir.module.category">
+        <field name="name">Machinery Management</field>
+        <field name="description">Access rights related to machinery management system.</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="res.groups.privilege" id="machinery_management_privilege">
+        <field name="name">Machinery Management Privilege</field>
+        <field name="category_id" ref="equipment_management_system.module_machinery_management_category"/>
+        <field name="sequence">4</field>
+    </record>
+    <record id="group_machinery_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="equipment_management_system.machinery_management_privilege"/>
+        <field name="comment">Users in this group have access to every machinery management model.</field>
+    </record>
+    <record id="group_machinery_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="equipment_management_system.machinery_management_privilege"/>
+        <field name="comment">Users in this group have access to only machinery master.</field>
+    </record>
+    <record id="group_machinery_viewer" model="res.groups">
+        <field name="name">Viewer</field>
+        <field name="privilege_id" ref="equipment_management_system.machinery_management_privilege"/>
+        <field name="comment">Users in this group only have access to view.</field>
+    </record>
+<!--    end-->
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <record id="account_tax_inherit" model="ir.ui.view">
+        <field name="name">Account Tax Inherit</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='active']" position="after">
+                <field name="sap_tax_id" options="{'no_create': True, 'no_open': True}" groups="base.group_no_one"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

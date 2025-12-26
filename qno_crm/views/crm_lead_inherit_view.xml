@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_crm_lead_kanban_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="before">
+                <div class="o_kanban_secondary mt-1">
+                    <span t-esc="record.partner_name.value"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_list_inherit_move_partner" model="ir.ui.view">
+        <field name="name">crm.lead.list.inherit.move.partner</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_from']" position="after">
+                <field name="partner_name" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <field name="description_plaintext"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

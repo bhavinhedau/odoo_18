@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="spreadsheet_dashboard.spreadsheet_dashboard_menu_root" model="ir.ui.menu">
+        <field name="group_ids" eval="[(Command.set([ref('base.group_no_one')]))]"/>
+    </record>
+    <record id="base.menu_management" model="ir.ui.menu">
+        <field name="group_ids" eval="[(Command.set([ref('base.group_no_one')]))]"/>
+    </record>
+    <record id="account.menu_finance" model="ir.ui.menu">
+        <field name="group_ids" eval="[(Command.set([ref('base.group_no_one')]))]"/>
+    </record>
+</odoo>

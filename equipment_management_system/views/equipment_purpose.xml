@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="equipment_purpose_list_view" model="ir.ui.view">
+        <field name="name">equipment.purpose.list</field>
+        <field name="model">equipment.purpose</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="equipment_purpose_form_view" model="ir.ui.view">
+        <field name="name">equipment.purpose.form</field>
+        <field name="model">equipment.purpose</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="equipment_purpose_action" model="ir.actions.act_window">
+        <field name="name">Equipment Purpose</field>
+        <field name="res_model">equipment.purpose</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Equipment purpose
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

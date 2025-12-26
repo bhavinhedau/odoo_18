@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_customer_series_tree" model="ir.ui.view">
+        <field name="name">customer.series.list</field>
+        <field name="model">customer.series</field>
+        <field name="arch" type="xml">
+            <list string="Customer Series" editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_customer_series" model="ir.actions.act_window">
+        <field name="name">Customer Series</field>
+        <field name="res_model">customer.series</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

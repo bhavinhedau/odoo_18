@@ -1,0 +1,17 @@
+<odoo>
+    <record id="action_generate_excel_project_equipment_report" model="ir.actions.server">
+        <field name="name">Generate Equipment Report</field>
+        <field name="model_id" ref="model_project_master"/>
+        <field name="binding_model_id" ref="model_project_master"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_generate_project_equipment_excel()</field>
+    </record>
+
+    <record id="action_generate_excel_project_report" model="ir.actions.server">
+        <field name="name">Generate Project Report</field>
+        <field name="model_id" ref="model_project_master"/>
+        <field name="binding_model_id" ref="model_project_master"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_generate_project_report()</field>
+    </record>
+</odoo>

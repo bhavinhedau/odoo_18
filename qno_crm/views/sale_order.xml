@@ -1,0 +1,131 @@
+<odoo>
+    <record id="view_order_form_inherit_sap_post" model="ir.ui.view">
+        <field name="name">sale.order.form.post.sap</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="apicaller_sapso"
+                        type="object"
+                        string="Post to SAP"
+                        class="btn-primary" invisible="state not in ('sale') or doc_entry"
+                />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="SAP" name="sap">
+                    <group name="SAP">
+                        <field name="doc_entry" readonly="1"/>
+                        <field name="json" readonly="1"/>
+                        <field name="sap_sync_response" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <!--Header Level UDFs Fields-->
+
+            <xpath expr="//notebook/page[@name='order_lines']" position="after">
+                <page string="SAP Fields" name="sap fields">
+                    <group>
+                        <group string="UDF Domestic Fields">
+                            <field name="sales_type"/>
+                            <field name="transporter_code"/>
+                            <field name="Name_Of_Transpt"/>
+                            <field name="une_invf"/>
+                            <field name="freightterm"/>
+                            <field name="delinst"/>
+                            <field name="indentyype"/>
+                            <field name="indentagent"/>
+                            <field name="indentname"/>
+                            <field name="commper"/>
+                            <field name="commrs"/>
+                            <field name="consigtype"/>
+                            <field name="consigneecode"/>
+                            <field name="consigneeshipiD"/>
+                            <field name="consigneename"/>
+                            <field name="consigneeadd"/>
+                            <field name="ordertype"/>
+                        </group>
+
+
+                        <group string="UDF Export Fields">
+                            <field name="conorg"/>
+                            <field name="bldate"/>
+                            <field name="bl_type"/>
+                            <field name="bl_special_instruction"/>
+                            <field name="portload"/>
+                            <field name="portdis"/>
+                            <field name="orgnl_doc_courier"/>
+                            <field name="finaldesc"/>
+                            <field name="finaldes"/>
+                            <field name="delins"/>
+                            <field name="inco_term"/>
+                            <field name="notify_party"/>
+
+                                <!--PIGMENT FIELD-->
+                            <field name="excisetran"/>
+                            <field name="precarr"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+
+                <!--line level fields-->
+
+            <xpath expr="//list/field[@name='tax_ids']" position="after">
+                <field name="u_grade"/>
+                <field name="u_pharma"/>
+                <field name="bp_catalog_no"/>
+                <field name="freight_term"/>
+                <field name="freightag"/>
+                <field name="intval"/>
+                <field name="intcost"/>
+                <field name="commper"/>
+                <field name="commrs"/>
+                <field name="netreal"/>
+                <field name="packtype"/>
+                <field name="u_netwtpkg"/>
+                <field name="totalbox"/>
+                <field name="pallet_req"/>
+                <field name="pallettype"/>
+                <field name="palletdim"/>
+                <field name="customerhsn"/>
+                <field name="marks_nos"/>
+                <field name="adv_lic"/>
+                <field name="lictype"/>
+                <field name="licno"/>
+                <field name="license_date"/>
+
+                <!--PIGMENT FIELD-->
+                <field name="u_gradeII"/>
+                <field name="application_of_test"/>
+                <field name="pss_css_or_direct_dispatch"/>
+                <field name="pss_css_status"/>
+                <field name="quality_reference_remark"/>
+                <field name="distcode"/>
+                <field name="transporter_code"/>
+                <field name="une_tpnm"/>
+                <field name="une_remk"/>
+                <field name="itemspecs"/>
+                <field name="u_check"/>
+                <field name="rodtep"/>
+                <field name="packing_type_of_bag"/>
+                <field name="bag_label"/>
+                <field name="net_weight_packing_of_bag"/>
+                <field name="total_no_bag"/>
+                <field name="bag_dimensions"/>
+                <field name="packing_type_of_box"/>
+                <field name="net_weight_packing_of_box"/>
+                <field name="box_label"/>
+                <field name="totalbox"/>
+                <field name="box_dimensions"/>
+                <field name="packing_type_of_pallet"/>
+                <field name="pallet_tr_weight"/>
+                <field name="net_weight_packing_of_pallet"/>
+                <field name="pallet_label"/>
+                <field name="total_no_pallet"/>
+                <field name="q_returnitem"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

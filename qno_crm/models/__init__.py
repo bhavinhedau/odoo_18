@@ -1,0 +1,3 @@
+from . import sap_taxes,sap_warehouse,res_company_inherit,account_tax_inherit,res_partner,customer_series
+from . import customer_group,sap_payment_term,payment_term_inherit,api_log,product_template,sale_order,sap_delivery,sap_credit_note,sap_invoice,sap_payment
+from . import crm_lead_inherit

@@ -1,0 +1,80 @@
+<odoo>
+    <record id="view_sap_payment_list" model="ir.ui.view">
+        <field name="name">sap.payment.list</field>
+        <field name="model">sap.payment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="doc_entry"/>
+                <field name="doc_num"/>
+                <field name="card_code"/>
+                <field name="card_name"/>
+                <field name="transfer_sum"/>
+                <field name="doc_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sap_payment_form" model="ir.ui.view">
+        <field name="name">sap.payment.form</field>
+        <field name="model">sap.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="doc_entry"/>
+                            <field name="doc_num"/>
+                            <field name="doc_type"/>
+                            <field name="doc_date"/>
+                            <field name="card_code"/>
+                            <field name="card_name"/>
+                            <field name="doc_currency"/>
+                        </group>
+                        <group>
+                            <field name="transfer_sum"/>
+                            <field name="doc_rate"/>
+                            <field name="remarks"/>
+                            <field name="journal_remarks"/>
+                            <field name="bpl_id"/>
+                            <field name="bpl_name"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Invoices">
+                            <field name="invoice_line_ids">
+                                <list>
+                                    <field name="line_num"/>
+                                    <field name="doc_entry"/>
+                                    <field name="sum_applied"/>
+                                    <field name="doc_line"/>
+                                    <field name="invoice_type"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Cash Flow">
+                            <field name="cashflow_ids">
+                                <list>
+                                    <field name="payment_means"/>
+                                    <field name="check_number"/>
+                                    <field name="amount_lc"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sap_payment" model="ir.actions.act_window">
+        <field name="name">SAP Payments</field>
+        <field name="res_model">sap.payment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_sap_payments" action="action_sap_payment" name="Sap Payments" parent="menu_sap_data_root"
+              sequence="4"/>
+</odoo>

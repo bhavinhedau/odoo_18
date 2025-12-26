@@ -1,0 +1,16 @@
+<odoo>
+    <record id="equipment_name_list_view" model="ir.ui.view">
+        <field name="name">equipment.name.list</field>
+        <field name="model">equipment.name</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="equipment_name_action" model="ir.actions.act_window">
+        <field name="name">Equipment Name</field>
+        <field name="res_model">equipment.name</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

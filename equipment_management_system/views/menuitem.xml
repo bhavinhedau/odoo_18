@@ -1,0 +1,183 @@
+<odoo>
+    <data>
+        <menuitem id="plant_management_root" name="Plant Management" sequence="3"
+                  groups="equipment_management_system.group_plant_viewer,equipment_management_system.group_plant_user,equipment_management_system.group_plant_manager"
+                  web_icon="equipment_management_system,static/description/plant.png"/>
+        <menuitem id="menu_project_master_root" name="Project Management" sequence="4"
+                  groups="equipment_management_system.group_project_viewer,equipment_management_system.group_project_user,equipment_management_system.group_project_manager"
+                  web_icon="equipment_management_system,static/description/project.png"/>
+        <menuitem id="equipment_menu_root" name="Equipment Management" sequence="1"
+                  groups="equipment_management_system.group_equipment_viewer,equipment_management_system.group_equipment_user,equipment_management_system.group_equipment_manager"
+                  web_icon="equipment_management_system,static/description/equipment.png"/>
+        <menuitem id="menu_machinery_progress_root" name="Machinery" sequence="2"
+                  groups="equipment_management_system.group_machinery_viewer,equipment_management_system.group_machinery_user,equipment_management_system.group_machinery_manager"
+                  web_icon="equipment_management_system,static/description/machinery.png"/>
+
+        <menuitem
+                id="menu_plant_master_main"
+                name="Plant Management"
+                parent="plant_management_root"
+                action="action_plant_master"
+                sequence="1"
+        />
+        <!-- Sub Menu -->
+        <menuitem id="equipment_master_menu"
+                  name="Equipment Management"
+                  parent="equipment_menu_root"
+                  action="equipment_master_action"
+                  sequence="1"/>
+
+        <menuitem id="configuration_menu_root"
+                  name="Configuration"
+                  parent="equipment_menu_root"
+                  groups="group_equipment_manager"
+                  sequence="2"/>
+
+        <menuitem id="equipment_configuration"
+                  name="Equipment Configuration"
+                  parent="configuration_menu_root"
+                  groups="group_equipment_manager"
+                  sequence="1"
+        />
+        <!-- Sub Menu -->
+        <!--        <menuitem id="equipment_name_menu"-->
+        <!--                  name="Equipment Name"-->
+        <!--                  parent="equipment_configuration"-->
+        <!--                  action="equipment_name_action"-->
+        <!--                  sequence="1"/>-->
+
+        <menuitem id="equipment_type_menu"
+                  name="Equipment Type"
+                  parent="equipment_configuration"
+                  action="equipment_type_action"
+                  sequence="2"/>
+        <!--        <menuitem id="hired_equipment_type_menu"-->
+        <!--                  name="Hired Equipment Name"-->
+        <!--                  parent="equipment_configuration"-->
+        <!--                  action="hired_equipment_type_action"-->
+        <!--                  sequence="3"/>-->
+        <menuitem id="equipment_maker_menu"
+                  name="Equipment Maker"
+                  parent="equipment_configuration"
+                  action="equipment_maker_action"
+                  sequence="4"/>
+        <menuitem id="equipment_capacity_menu"
+                  name="Equipment Capacity"
+                  parent="equipment_configuration"
+                  action="equipment_capacity_action"
+                  sequence="5"/>
+        <menuitem id="equipment_model_menu"
+                  name="Equipment Model"
+                  parent="equipment_configuration"
+                  action="equipment_model_action"
+                  sequence="6"/>
+        <menuitem id="equipment_purpose_menu"
+                  name="Equipment Purpose"
+                  parent="equipment_configuration"
+                  action="equipment_purpose_action"
+                  sequence="7"/>
+        <menuitem id="unit_utilization_menu"
+                  name="Applicable Unit Of Utilization"
+                  parent="equipment_configuration"
+                  action="unit_utilization_action"
+                  sequence="8"/>
+
+        <!--    my-->
+        <menuitem id="menu_project_master_list"
+                  name="Projects"
+                  parent="menu_project_master_root"
+                  action="action_project_master"
+                  sequence="1"/>
+        <menuitem id="menu_project_reporting"
+                  name="Reporting"
+                  parent="menu_project_master_root"
+                  groups="group_project_manager"
+                  sequence="2"/>
+        <menuitem id="menu_project_config"
+                  name="Configuration"
+                  parent="menu_project_master_root"
+                  groups="group_project_manager"
+                  sequence="3"/>
+        <menuitem id="menu_division_master"
+                  name="Divisions"
+                  parent="menu_project_config"
+                  action="action_division_master"
+                  groups="group_project_manager"
+                  sequence="1"/>
+
+        <menuitem id="menu_project_assign_equipment"
+                  name="Assign Equipment"
+                  parent="menu_project_reporting"
+                  action="action_project_assign_equipment"
+                  groups="group_project_manager"
+                  sequence="1"/>
+
+        <menuitem
+                id="menu_plant_management_config"
+                name="Configuration"
+                parent="plant_management_root"
+                groups="group_plant_manager"
+                sequence="2"
+        />
+        <menuitem
+                id="menu_plant_management_config_plant_config"
+                name="Plant Configuration"
+                parent="menu_plant_management_config"
+                groups="group_plant_manager"
+                sequence="1"
+        />
+        <menuitem
+                id="menu_plant_maker"
+                name="Plant Maker"
+                parent="menu_plant_management_config_plant_config"
+                action="action_plant_maker"
+                sequence="1"
+        />
+        <menuitem
+                id="menu_maker_master_name"
+                name="Maker Master Name"
+                parent="menu_plant_management_config_plant_config"
+                action="action_maker_master_name"
+                sequence="2"
+        />
+        <menuitem
+                id="menu_plant_model"
+                name="Plant Model"
+                parent="menu_plant_management_config_plant_config"
+                action="action_plant_model"
+                sequence="3"
+        />
+        <menuitem
+                id="menu_plant_capacity"
+                name="Plant Capacity"
+                parent="menu_plant_management_config_plant_config"
+                action="action_plant_capacity"
+                sequence="4"
+        />
+        <menuitem
+                id="menu_plant_category"
+                name="Plant Category"
+                parent="menu_plant_management_config_plant_config"
+                action="action_plant_category"
+                sequence="5"
+        />
+        <menuitem id="menu_machinery_progress"
+                  name="Machinery Progress"
+                  parent="menu_machinery_progress_root"
+                  action="action_machinery_progress"
+                  sequence="1"/>
+
+        <menuitem id="menu_machinery_progress_reporting"
+                  name="Reporting"
+                  parent="menu_machinery_progress_root"
+                  groups="group_machinery_manager"
+                  sequence="2"/>
+
+        <menuitem id="menu_machinery_progress_line"
+                  name="Machinery Progress"
+                  parent="menu_machinery_progress_reporting"
+                  action="action_machinery_progress_line"
+                  groups="group_machinery_manager"
+                  sequence="1"/>
+    </data>
+</odoo>

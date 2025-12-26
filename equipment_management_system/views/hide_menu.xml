@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="base.menu_management" model="ir.ui.menu">
+        <field name="group_ids" eval="[(Command.set([ref('base.group_no_one')]))]"/>
+    </record>
+    <record id="mail.menu_root_discuss" model="ir.ui.menu">
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

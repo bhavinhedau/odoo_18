@@ -1,0 +1,38 @@
+<odoo>
+    <record id="product_template_inherit_sap_warehouse_char" model="ir.ui.view">
+        <field name="name">product.template.sap.warehouse.char.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">false</attribute>
+            </xpath>
+            <xpath expr="//group[@name='internal_notes']" position="before">
+                <group string="Custom" name="custom_group">
+                    <group>
+                        <field name="sap_default_warehouse"/>
+                        <field name="measurementname"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_product_form_inherit_sap_fields" model="ir.ui.view">
+        <field name="name">product.form.inherit.sap.fields</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">false</attribute>
+            </xpath>
+            <xpath expr="//group[@name='internal_notes']" position="before">
+                <group string="Custom" name="custom_group">
+                    <group>
+                        <field name="sap_default_warehouse"/>
+                        <field name="measurementname"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

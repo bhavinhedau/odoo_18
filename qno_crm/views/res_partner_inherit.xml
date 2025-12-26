@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_cardcode" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.cardcode</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="cardcode" readonly="1" style="color: green;" nolable="1"/>
+                <field name="contact_person"/>
+            </xpath>
+
+            <!--            <xpath expr="//field[@name='child_ids']/form//group//group//field[@name='name']" position="after">-->
+            <!--                <field name="contact_code" required="1"/>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='l10n_in_pan']" position="after">-->
+            <!--                <field name="customer_group" options="{'no_open': True, 'no_create': True}"/>-->
+            <!--                <field name="outlattype"/>-->
+            <!--                <field name="outlatchanneltype"/>-->
+            <!--                <field name="route" readonly="True"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="export_to_sap"
+                            string="Export To SAP"
+                            type="object"
+                            class="btn-primary"
+                            invisible="cardcode"
+                    />
+                    <button name="update_to_sap"
+                            string="Update To SAP"
+                            type="object"
+                            class="btn-primary"
+                            invisible="not cardcode"
+                    />
+                    <!--                    <button name="action_approve_partner"-->
+                    <!--                            string="Approve"-->
+                    <!--                            type="object"-->
+                    <!--                            class="btn-primary"-->
+                    <!--                    invisible ="partner_state != 'draft' or customer_rank == 0 or parent_id > 0"-->
+                    <!--                            groups="qno_dms.group_distributor_admin,sales_team.group_sale_manager"-->
+                    <!--                    />-->
+                    <!--&lt;!&ndash;                            attrs="{'invisible': [('partner_state', '!=', 'draft')]}"/>&ndash;&gt;-->
+
+                    <!--                    &lt;!&ndash; Reject Button &ndash;&gt;-->
+                    <!--                    <button name="action_reject_partner"-->
+                    <!--                            string="Reject"-->
+                    <!--                            type="object"-->
+                    <!--                            class="btn-secondary"-->
+                    <!--                            invisible ="partner_state != 'draft' or customer_rank == 0 or parent_id > 0"-->
+                    <!--                            groups="qno_dms.group_distributor_admin,sales_team.group_sale_manager"-->
+                    <!--                    />-->
+                    <!--                    <field name="partner_state" widget="statusbar" invisible="customer_rank == 0"-->
+                    <!--                           statusbar_visible="draft,approved"/>-->
+                </header>
+            </xpath>
+            <!--            <xpath expr="//field[@name='email']" position="attributes">-->
+            <!--                <attribute name="required">customer_rank > 0</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='phone']" position="attributes">-->
+            <!--                <attribute name="required">customer_rank > 0</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='function']" position="after">-->
+            <!--                <field name="contact_person" required="customer_rank > 0"/>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='category_id']" position="after">-->
+            <!--                <field name="pricelist_id" invisible="customer_rank > 0"/>-->
+            <!--                <field name="pricelist_name" invisible="customer_rank > 0"/>-->
+            <!--                <field name="latitude"/>-->
+            <!--                <field name="longitude"/>-->
+            <!--&lt;!&ndash;                <field name="is_finished_goods_dairy" />&ndash;&gt;-->
+            <!--&lt;!&ndash;                <field name="is_finished_goods_ice_cream"/>&ndash;&gt;-->
+            <!--                <field name="product_category_ids" widget="many2many_tags" options="{'no_open': True, 'no_create': True}" invisible="1"/>-->
+            <!--                <field name="route_id" options="{'no_open': True, 'no_create': True}"/>-->
+            <!--&lt;!&ndash;                <field name="allowed_time_to"/>&ndash;&gt;-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//notebook" position="inside">-->
+            <!--                <page string="SAP" groups="base.group_no_one">-->
+            <!--                    <group name="SAP">-->
+            <!--                        <button name="callapi_sap"-->
+            <!--                                type="object"-->
+            <!--                                string="Export to SAP"-->
+            <!--                                class="btn-primary"/>-->
+            <!--                        <button name="update_customer_sap"-->
+            <!--                                type="object"-->
+            <!--                                string="Update to SAP"-->
+            <!--                                class="btn-primary"/>-->
+            <!--                        <field name="json" readonly="True"/>-->
+            <!--                        <field name="sap_response" readonly="True"/>-->
+            <!--                    </group>-->
+            <!--                </page>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//group[@id='invoice_send_settings']" position="after">-->
+            <!--                <group string="Documents">-->
+            <!--                    <field name="aadhaar_card_pdf" filename="aadhaar_filename"/>-->
+            <!--                    <field name="pan_card_pdf" filename="pan_filename"/>-->
+            <!--                    <field name="gst_certificate_pdf" filename="gst_filename"/>-->
+            <!--                    <field name="fssai_certificate_pdf" filename="fssai_filename"/>-->
+            <!--                    <field name="msem_certificate_pdf" filename="msem_filename"/>-->
+            <!--                    <field name="photo_pdf" filename="photo_filename"/>-->
+            <!--                    <field name="deposit_detail_pdf" filename="deposit_filename"/>-->
+            <!--                    <field name="address_proof_pdf" filename="address_proof_filename"/>-->
+            <!--                </group>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//sheet/group" position="before">-->
+            <!--                <group>-->
+            <!--                    <group>-->
+            <!--                        <div>-->
+            <!--                            <h2>-->
+            <!--                                <label for="cardcode" string="Card Code"/>-->
+            <!--                                <field name="cardcode" class="oe_inline"/>-->
+            <!--                            </h2>-->
+            <!--                        </div>-->
+            <!--                        <field name="sap_pricelist_id" required="customer_rank > 0" options="{'no_open': True, 'no_create': True}" invisible="customer_rank == 0"/>-->
+            <!--                        <field name="series_id" options="{'no_open': True, 'no_create': True}" invisible="customer_rank == 0"/>-->
+
+            <!--                    </group>-->
+            <!--                    <group>-->
+            <!--                        <field name="dairy_route_product" readonly="False"/>-->
+            <!--                        <field name="ice_cream_route_product" readonly="False"/>-->
+            <!--                    </group>-->
+
+            <!--                </group>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='property_payment_term_id']" position="attributes">-->
+            <!--                <attribute name="required">customer_rank > 0</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='company_id']" position="attributes">-->
+            <!--                <attribute name="required">customer_rank > 0</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='website']" position="attributes">-->
+            <!--                <attribute name="invisible">True</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='website']" position="attributes">-->
+            <!--                <attribute name="invisible">True</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='category_id']" position="attributes">-->
+            <!--                <attribute name="invisible">True</attribute>-->
+            <!--            </xpath>-->
+
+        </field>
+    </record>
+    <record id="view_partner_bank_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='acc_number']" position="after">
+                <field name="rownumber" readonly="1"/>
+                <!--                <field name="cheque_no" required="online_payment_ref == False"-->
+                <!--                       placeholder="Required Cheque No. or Online Payment Ref"/>-->
+                <!--                <field name="cheque_amount" required="cheque_no == True"/>-->
+                <!--            <field name="cheque_issued_bank"/>-->
+                <!--                <field name="online_payment_ref" required="cheque_no == False"-->
+                <!--                       placeholder="Required Cheque No. or Online Payment Ref"/>-->
+                <!--                <field name="online_payment_amount" required="online_payment_ref == True"/>-->
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="after">
+
+                <field name="branch"/>
+                <!--            <field name="country"/>-->
+                <!--                <field name="bankcode"/>-->
+                <field name="inernalkey"/>
+                <field name="accountname"/>
+                <field name="bicswiftcode"/>
+                <field name="rownumber"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

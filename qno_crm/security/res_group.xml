@@ -1,0 +1,14 @@
+<odoo>
+    <record id="group_sap_credit_user" model="res.groups">
+        <field name="name">SAP Credit Notes Access</field>
+    </record>
+
+    <record id="group_sap_delivery_user" model="res.groups">
+        <field name="name">SAP Delivery Access</field>
+    </record>
+
+    <record id="group_sap_invoice_user" model="res.groups">
+        <field name="name">SAP Invoice Access</field>
+    </record>
+
+</odoo>
